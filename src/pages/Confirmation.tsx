@@ -15,39 +15,51 @@ export function Confirmation() {
   const location = useLocation();
   const formData = location.state as FormData;
 
+  const getClothingSummary = () => {
+    return Object.entries(formData.clothingItems)
+      .filter(([_, value]) => value > 0)
+      .map(([key, value]) => `${value}x ${key}`)
+      .join(', ');
+  };
+
+  const getCurrentDate = () => {
+    const date = new Date();
+    return date.toLocaleString();
+  };
+
   return (
     <section className="p-4">
       <h2 className="text-center font-semibold text-2xl">Spendenbestätigung</h2>
-      <p className="text-center mt-2">Vielen Dank für Ihre Spende! Hier sind die Details:</p>
-      <div className="max-w-lg mx-auto mt-8 space-y-4">
-        <div>
-          <h3 className="font-semibold">Zielkrisengebiet:</h3>
-          <p>{formData.targetRegion}</p>
-        </div>
-        <div>
-          <h3 className="font-semibold">Art der Kleidung:</h3>
-          <ul>
-            {Object.entries(formData.clothingItems).map(([key, value]) => (
-              value > 0 && (
-                <li key={key}>
-                  {key}: {value}
-                </li>
-              )
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h3 className="font-semibold">Spendenoption:</h3>
-          <p>{formData.spendenoption}</p>
-        </div>
-        {formData.spendenoption === 'abholung' && (
-          <div>
-            <h3 className="font-semibold">Abholadresse:</h3>
-            <p>{formData.abholVorname} {formData.abholNachname}</p>
-            <p>{formData.abholAdresse}</p>
-            <p>{formData.abholStadt}, {formData.abholPLZ}</p>
+      <div className="bg-white rounded-lg p-6 max-w-lg mx-auto mt-8 space-y-4 shadow-md shadow-green-500/40">
+        <p className="text-center">Vielen Dank für Ihre Spende!<br/>Hier sind die Details:</p>
+        <div role="alert" className="fade alert alert-success show">
+          <div className="summary-container">
+            <div className="flex justify-between">
+              <dt className="font-semibold">Gewählte Art der Spende:</dt>
+              <dd>{formData.spendenoption === 'persönlich' ? 'Übergabe an der Geschäftsstelle' : 'Abholung durch TextilTribut'}</dd>
+            </div>
+            <div className="flex justify-between">
+              <dt className="font-semibold">Gewähltes Krisengebiet:</dt>
+              <dd>{formData.targetRegion}</dd>
+            </div>
+            <div className="flex justify-between">
+              <dt className="font-semibold">Art der Kleiderspende:</dt>
+              <dd>{getClothingSummary()}</dd>
+            </div>
+            {formData.spendenoption === 'abholung' && (
+              <div className="flex justify-between">
+                <dt className="font-semibold">Abholadresse:</dt>
+                <dd>
+                  {formData.abholVorname} {formData.abholNachname}, {formData.abholAdresse}, {formData.abholStadt}, {formData.abholPLZ}
+                </dd>
+              </div>
+            )}
           </div>
-        )}
+          <hr className="m-2" />
+          <figcaption className="blockquote-footer text-gray-500" data-testid="submit-date">
+            Übermittelt am {getCurrentDate()}
+          </figcaption>
+        </div>
       </div>
     </section>
   );
