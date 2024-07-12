@@ -5,8 +5,8 @@ interface FormData {
   targetRegion: string;
   clothingItems: { [key: string]: number };
   spendenoption: string;
-  abholVorname?: string,
-  abholNachname?: string,
+  abholVorname?: string;
+  abholNachname?: string;
   abholAdresse?: string;
   abholStadt?: string;
   abholPLZ?: string;
@@ -69,8 +69,8 @@ export function Spenden() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Weiterleiten zur Bestätigungsseite
-    navigate('/confirmation');
+    // Weiterleiten zur Bestätigungsseite mit Zustand
+    navigate('/confirmation', { state: formData });
   };
 
   return (
@@ -152,7 +152,7 @@ export function Spenden() {
                 <input
                   type="text"
                   name="abholVorname"
-                  value={formData.abholStadt}
+                  value={formData.abholVorname}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-none border-2 border-main/25 hover:border-main"
                   required
@@ -163,7 +163,7 @@ export function Spenden() {
                 <input
                   type="text"
                   name="abholNachname"
-                  value={formData.abholPLZ}
+                  value={formData.abholNachname}
                   onChange={handleInputChange}
                   className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-none border-2 border-main/25 hover:border-main"
                   required
