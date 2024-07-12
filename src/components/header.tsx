@@ -8,7 +8,7 @@ export function Header() {
         </a>
         <div>
           <a href="/" className="px-4 py-2 rounded mr-4 hover:text-main">
-            Home
+            Startseite
           </a>
           <a href="/spenden" className="px-4 py-2 rounded mr-4 hover:text-main">
             Spenden
