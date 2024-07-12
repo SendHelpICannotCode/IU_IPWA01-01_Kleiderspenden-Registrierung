@@ -1,21 +1,23 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Header } from './components/header';
-import { Historie } from './pages/Historie';
 import { Home } from './pages/Home';
-import { Spenden } from './pages/Pages';
+import { Spenden } from './pages/Spenden';
+import { Footer } from './components/footer';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       <Header />
-      <Router>
+      <main className="flex-grow">
+        <Router>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/spenden" element={<Spenden />} />
-            <Route path="/historie" element={<Historie />} />
           </Routes>
         </Router>
+      </main>
+      <Footer />
     </div>
   );
 }
