@@ -4,6 +4,7 @@ import { Header } from './components/header';
 import { Home } from './pages/Home';
 import { Spenden } from './pages/Spenden';
 import { Confirmation } from './pages/Confirmation';
+import { Impressum } from './pages/Impressum';
 import { Footer } from './components/footer';
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/spenden" element={<Spenden />} />
             <Route path="/confirmation" element={<Confirmation />} />
+            <Route path="/impressum" element={<Impressum />} />
           </Routes>
         </Router>
       </main>
