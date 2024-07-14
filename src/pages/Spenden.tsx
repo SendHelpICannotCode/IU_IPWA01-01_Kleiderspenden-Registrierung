@@ -24,6 +24,8 @@ export function Spenden() {
     abholPLZ: ''
   });
 
+  const [error, setError] = useState<string | null>(null);
+
   const navigate = useNavigate();
 
   const regionOptions = ['Naher Osten', 'Ukraine', 'Sudan'];
@@ -69,6 +71,11 @@ export function Spenden() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Validate postal code
+    if (formData.spendenoption === 'abholung' && formData.abholPLZ && !formData.abholPLZ.startsWith('12')) {
+      setError('Die Postleitzahl muss mit "12" beginnen.');
+      return;
+    }
     // Weiterleiten zur Bestätigungsseite mit Zustand
     navigate('/confirmation', { state: formData });
   };
@@ -203,6 +210,7 @@ export function Spenden() {
                   className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-none border-2 border-main/25 hover:border-main"
                   required
                 />
+                {error && <p className="text-red-500 mt-2">{error}</p>}
               </div>
             </div>
           </div>
