@@ -36,20 +36,20 @@ export function Confirmation() {
           <div className="summary-container">
             <div className="flex justify-between">
               <dt className="font-semibold">Gewählte Art der Spende:</dt>
-              <dd>{formData.spendenoption === 'persönlich' ? 'Übergabe an der Geschäftsstelle' : 'Abholung durch TextilTribut'}</dd>
+              <dd className="text-right">{formData.spendenoption === 'persönlich' ? 'Übergabe an der Geschäftsstelle' : 'Abholung durch TextilTribut'}</dd>
             </div>
             <div className="flex justify-between">
               <dt className="font-semibold">Gewähltes Krisengebiet:</dt>
-              <dd>{formData.targetRegion}</dd>
+              <dd className="text-right">{formData.targetRegion}</dd>
             </div>
             <div className="flex justify-between">
               <dt className="font-semibold">Art der Kleiderspende:</dt>
-              <dd>{getClothingSummary()}</dd>
+              <dd className="text-right">{getClothingSummary()}</dd>
             </div>
             {formData.spendenoption === 'abholung' && (
               <div className="flex justify-between">
                 <dt className="font-semibold">Abholadresse:</dt>
-                <dd>
+                <dd className="text-right">
                   {formData.abholVorname} {formData.abholNachname}, {formData.abholAdresse}, {formData.abholStadt}, {formData.abholPLZ}
                 </dd>
               </div>
